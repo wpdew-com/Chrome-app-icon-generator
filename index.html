@@ -374,11 +374,15 @@
             const canvas = document.getElementById(`canvas${size}`);
             const ctx = canvas.getContext('2d');
             
+            // Очищаємо canvas перед малюванням нової іконки
+            ctx.clearRect(0, 0, size, size);
+            
             const img = new Image();
             const svg = new Blob([svgString], {type: 'image/svg+xml'});
             const url = URL.createObjectURL(svg);
             
             img.onload = function() {
+                ctx.clearRect(0, 0, size, size);
                 ctx.drawImage(img, 0, 0, size, size);
                 URL.revokeObjectURL(url);
             };
